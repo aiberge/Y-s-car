@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import SchemaMarkup from '@/components/SchemaMarkup'
 import { LanguageProvider } from '@/contexts/language-context'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -67,8 +68,13 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="512x512" />
         <link rel="apple-touch-icon" href="/favicon.ico" sizes="512x512" />
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17042830853"></script>
-        <script
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17042830853"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];

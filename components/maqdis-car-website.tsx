@@ -505,13 +505,12 @@ const AirportShuttleSection = ({ language }: { language: Language }) => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="relative h-[400px] rounded-2xl overflow-hidden"
           >
-            <img
+            <Image
               src='/air.jpg'
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              alt="Vue aérienne de l'aéroport de Fès-Saïs"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
             />
           </motion.div>
         </div>
@@ -599,20 +598,11 @@ const Navigation = ({ onPageChange, currentPage }: {
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const langMenuRef = useRef<HTMLDivElement>(null)
   const { currentLanguage, switchLanguage } = useLanguageSwitch()
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLang = () => setIsLangOpen(!isLangOpen)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   // Close language menu when clicking outside
   useEffect(() => {
@@ -630,8 +620,6 @@ const Navigation = ({ onPageChange, currentPage }: {
     setIsLangOpen(false)
     setIsMenuOpen(false)
   }, [currentLanguage])
-
-  const t = translations[currentLanguage]
 
   const handleLanguageChange = (lang: Language) => {
     switchLanguage(lang)
@@ -816,7 +804,6 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
   const [customReturnAgency, setCustomReturnAgency] = useState('')
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0])
   const [endDate, setEndDate] = useState(new Date().toISOString().split('T')[0])
-  const [showDatePicker, setShowDatePicker] = useState(false)
   const [showMobileForm, setShowMobileForm] = useState(false)
 
   const handleBooking = () => {
@@ -1396,7 +1383,7 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
                   </h2>
                   
                   <p className="text-gray-600 mb-4">
-                    Chez <span className="font-semibold">Location Maroc</span>, nous vous proposons un service de location voiture à Fès simple, rapide et accessible dès 250dh/jour. Que vous recherchiez une citadine pratique pour circuler en ville, un SUV pour partir en aventure, ou un modèle compact pour plus de confort, nous avons le véhicule qu'il vous faut.
+                    Chez <span className="font-semibold">Location Maroc</span>, nous vous proposons un service de location voiture à Fès simple, rapide et accessible dès 250dh/jour. Que vous recherchiez une citadine pratique pour circuler en ville, un SUV pour partir en aventure, ou un modèle compact pour plus de confort, nous avons le véhicule qu&#39;il vous faut.
                   </p>
                   
                   <p className="text-gray-600 mb-6">
@@ -1404,7 +1391,7 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
                   </p>
                   
                   <p className="text-gray-600 mb-8">
-                    Notre objectif est de devenir votre référence pour toute location de voiture à Fès avec une flotte diversifiée et un service client à l'écoute. Profitez de la livraison gratuite à l'aéroport de Fès et réservez facilement via WhatsApp, sans paiement en ligne.
+                    Notre objectif est de devenir votre référence pour toute location de voiture à Fès avec une flotte diversifiée et un service client à l&#39;écoute. Profitez de la livraison gratuite à l&#39;aéroport de Fès et réservez facilement via WhatsApp, sans paiement en ligne.
                   </p>
                   
                   <Button 
