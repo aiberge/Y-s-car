@@ -630,7 +630,7 @@ const Navigation = ({ onPageChange, currentPage }: {
     <nav className="fixed w-full top-0 z-50 transition-all duration-300 bg-gray-100 shadow-sm">
       <div className="container-fluid mx-auto px-8">
         <div className="flex justify-between items-center h-24">
-          {/* Logo/Brand - Centered on mobile, left-aligned on desktop */}
+          {/* Logo/Brand - Centered on mobile, left-aligned on desktop nnnn*/}
           <div className="flex-1 flex items-center justify-center md:justify-start">
             <div className="relative w-80 h-24">
               <Image
