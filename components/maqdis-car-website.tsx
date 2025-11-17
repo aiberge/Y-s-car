@@ -27,7 +27,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { translations } from '../translations/translations'
-import Modal from './Modal'
 import ReservationForm from './ReservationForm'
 import { useLanguageSwitch, Language, languageNames } from '@/utils/language'
 
@@ -57,7 +56,7 @@ const cars: Car[] = [
     name: 'Dacia Logan diesel',
     version: 'Base',
     type: 'Économique',
-    price: 300,
+    price: 250,
     image: '/dacia.jpg',
     featured: false,
     transmission: 'Manuelle',
@@ -69,8 +68,42 @@ const cars: Car[] = [
     trunkSize: 510,
     colors: ['blanc', 'noir']
   },
+    {
+    id: 2,
+    name: 'Citroen c4x automatique',
+    version: 'Premium',
+    type: 'Berline',
+    price: 450,
+    image: '/c4x.png',
+    featured: false,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 4,
+    airConditioning: true,
+    fuel: 'diesel',
+    maxSpeed: 180,
+    trunkSize: 620,
+    colors: ['blanc', 'noir']
+  },
+    {
+    id: 4,
+    name: 'Citroen c3',
+    version: 'Premium',
+    type: 'Berline',
+    price: 300,
+    image: '/c3.jpg',
+    featured: false,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 4,
+    airConditioning: true,
+    fuel: 'diesel',
+    maxSpeed: 180,
+    trunkSize: 620,
+    colors: ['blanc', 'noir']
+  },
   {
-    id: 3,
+    id: 9,
     name: 'Dacia Logan essence',
     version: 'Base',
     type: 'Économique',
@@ -87,8 +120,42 @@ const cars: Car[] = [
     colors: ['blanc', 'noir']
   },
   {
-    id: 5,
+    id: 8,
     name: 'Renault Clio 5 automatique',
+    version: 'Base',
+    type: 'Économique',
+    price: 350,
+    image: '/clio24.jpg',
+    featured: true,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 2,
+    airConditioning: true,
+    fuel: 'essence',
+    maxSpeed: 180,
+    trunkSize: 391,
+    colors: ['blanc', 'noir']
+  },
+      {
+    id: 7,
+    name: 'Peugeot 208',
+    version: 'Premium',
+    type: 'Berline',
+    price: 300,
+    image: '/208.jpeg',
+    featured: false,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 4,
+    airConditioning: true,
+    fuel: 'diesel',
+    maxSpeed: 180,
+    trunkSize: 620,
+    colors: ['blanc', 'noir']
+  },   
+    {
+    id: 5,
+    name: 'Renault Clio 5 ',
     version: 'Base',
     type: 'Économique',
     price: 300,
@@ -102,135 +169,16 @@ const cars: Car[] = [
     maxSpeed: 180,
     trunkSize: 391,
     colors: ['blanc', 'noir']
-  },
+  },   
   {
-    id: 17,
-    name: 'Volkswagen T-Roc',
-    version: 'Premium',
-    type: 'SUV',
-    price: 600,
-    image: '/trok.jpg',
-    featured: true,
-    transmission: 'Automatique',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'diesel',
-    maxSpeed: 200,
-    trunkSize: 445,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 18,
-    name: 'Renault Clio 4 manuelle',
-    version: 'Base',
-    type: 'Économique',
-    price: 300,
-    image: '/clio4.jpeg',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 2,
-    airConditioning: true,
-    fuel: 'diesel',
-    maxSpeed: 175,
-    trunkSize: 300,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 19,
-    name: 'Hyundai Accent 2023',
-    version: 'Base',
-    type: 'Économique',
-    price: 350,
-    image: '/acc.avif',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 2,
-    airConditioning: true,
-    fuel: 'essence',
-    maxSpeed: 180,
-    trunkSize: 389,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 22,
-    name: 'Hyundai Accent ',
-    version: 'Base',
-    type: 'Économique',
-    price: 300,
-    image: '/acc.avif',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 2,
-    airConditioning: true,
-    fuel: 'essence',
-    maxSpeed: 180,
-    trunkSize: 389,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 21,
-    name: 'Kia Seltos',
-    version: 'Premium',
-    type: 'SUV',
-    price: 600,
-    image: '/seltos.avif',
-    featured: true,
-    transmission: 'Automatique',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'diesel',
-    maxSpeed: 200,
-    trunkSize: 433,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 25,
-    name: 'Dacia Duster automatique',
-    version: 'Premium',
-    type: 'SUV',
-    price: 400,
-    image: '/daciaa.jpg',
-    featured: true,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 4,
-    airConditioning: true,
-    fuel: 'diesel',
-    maxSpeed: 190,
-    trunkSize: 445,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 24,
-    name: 'Dacia Duster manuelle',
-    version: 'Premium',
-    type: 'SUV',
-    price: 350,
-    image: '/daciaa.jpg',
-    featured: true,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 4,
-    airConditioning: true,
-    fuel: 'diesel',
-    maxSpeed: 190,
-    trunkSize: 445,
-    colors: ['blanc', 'noir']
-  },
-  {
-    id: 23,
-    name: 'Renault Express',
+    id: 8,
+    name: 'Renault capture',
     version: 'Premium',
     type: 'Berline',
-    price: 300,
-    image: '/express.png',
+    price: 350,
+    image: '/cap.webp',
     featured: false,
-    transmission: 'Manuelle',
+    transmission: 'Automatique',
     seats: 5,
     luggage: 4,
     airConditioning: true,
@@ -239,6 +187,23 @@ const cars: Car[] = [
     trunkSize: 620,
     colors: ['blanc', 'noir']
   },
+        {
+    id: 7,
+    name: 'Peugeot 208',
+    version: 'Premium',
+    type: 'Berline',
+    price: 350,
+    image: '/208g.avif',
+    featured: false,
+    transmission: 'Automatique',
+    seats: 5,
+    luggage: 4,
+    airConditioning: true,
+    fuel: 'diesel',
+    maxSpeed: 180,
+    trunkSize: 620,
+    colors: ['blanc', 'noir']
+  }
 ];
 
 const airports = [
@@ -247,162 +212,261 @@ const airports = [
   { code: 'Autre', name: 'Autre lieu (à préciser)' }
 ]
 
-const CarCard = ({ car }: { car: Car }) => {
-  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
-
+const CarCard = ({ car, onReserve }: { car: Car; onReserve: (car: Car) => void }) => {
   const handleWhatsAppClick = (car: Car) => {
     const message = `Bonjour, je suis intéressé(e) par la location de ${car.name} à ${car.price}dh/jour.`
-    const whatsappUrl = `https://wa.me/21266666666?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/212698969770?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
   };
 
   return (
-    <>
-      <Modal
-        isOpen={isReservationModalOpen}
-        onClose={() => setIsReservationModalOpen(false)}
-      >
-        <ReservationForm
-          car={car}
-          onClose={() => setIsReservationModalOpen(false)}
-        />
-      </Modal>
-
-      <motion.div
+    <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+        className="group relative flex flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
       >
-        <div className="relative h-64">
-          <div className="absolute top-4 left-4 z-10">
-            <span className="bg-white text-primary px-4 py-2 rounded-full text-sm font-semibold">
-              {car.type}
-            </span>
-          </div>
+        {/* Image */}
+        <div className="relative h-60 overflow-hidden">
           <Image
             src={car.image}
             alt={`${car.name} ${car.version} - Voiture à louer à Fès - ${car.type}`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={car.featured}
           />
+
+          {/* Type badge */}
+          <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
+            <span className="inline-flex items-center rounded-full bg-white/90 px-4 py-1 text-xs font-semibold text-primary shadow-sm">
+              {car.type}
+            </span>
+          </div>
+
+          {/* Featured shimmer */}
+          {car.featured && (
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+          )}
         </div>
 
-        <div className="p-6">
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">{car.name}</h3>
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="flex items-center gap-2">
-              <Armchair className="w-5 h-5 text-primary" />
-              <span className="text-gray-700 text-sm">{car.seats} places</span>
+        {/* Content */}
+        <div className="flex flex-1 flex-col gap-5 p-6">
+          {/* Title & price */}
+          <div className="flex items-start justify-between gap-3">
+            <div className="space-y-1">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900 line-clamp-2">{car.name}</h3>
+              <p className="text-xs uppercase tracking-wide text-gray-400">{car.version}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Fuel className="w-5 h-5 text-primary" />
-              <span className="text-gray-700 text-sm">{car.fuel}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Gauge className="w-5 h-5 text-primary" />
-              <span className="text-gray-700 text-sm">{car.transmission}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-primary" />
-              <span className="text-gray-700 text-sm">{car.luggage} bagages</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Palette className="w-5 h-5 text-primary" />
-              <div className="flex gap-1">
-                {car.colors?.map((color) => (
-                  <div
-                    key={color}
-                    className="w-6 h-6 rounded-full border-2 border-gray-200 hover:scale-110 transition-transform"
-                    style={{
-                      backgroundColor: color === 'blanc' ? '#fff' : '#000'
-                    }}
-                    title={color}
-                  />
-                ))}
-              </div>
+            <div className="rounded-2xl bg-primary/5 px-3 py-2 text-right">
+              <p className="text-base font-semibold text-primary leading-tight">{car.price} MAD</p>
+              <p className="text-[11px] text-gray-500">/ jour</p>
             </div>
           </div>
 
-          <div className="mb-8">
-            <h4 className="text-lg font-semibold mb-4">Équipements</h4>
-            <div className="grid grid-cols-2 gap-y-3">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">{car.seats} places</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">Climatisation</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">Bluetooth</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">ABS</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">Airbags</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-green-500" />
-                <span className="text-gray-700 text-sm">Direction assistée</span>
-              </div>
+          {/* Quick specs */}
+          <div className="grid grid-cols-2 gap-3 text-xs md:text-sm">
+            <div className="flex items-center gap-2 rounded-xl bg-gray-50 px-3 py-2">
+              <Armchair className="h-4 w-4 text-primary" />
+              <span className="text-gray-700">{car.seats} places</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-xl bg-gray-50 px-3 py-2">
+              <Briefcase className="h-4 w-4 text-primary" />
+              <span className="text-gray-700">{car.luggage} bagages</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-xl bg-gray-50 px-3 py-2">
+              <Gauge className="h-4 w-4 text-primary" />
+              <span className="text-gray-700">{car.transmission}</span>
+            </div>
+            <div className="flex items-center gap-2 rounded-xl bg-gray-50 px-3 py-2">
+              <Fuel className="h-4 w-4 text-primary" />
+              <span className="text-gray-700 capitalize">{car.fuel}</span>
             </div>
           </div>
 
-          <div className="flex flex-col mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <div>
-                <span className="text-2xl font-bold text-primary">{car.price} MAD</span>
-                <p className="text-xs text-gray-500">par jour</p>
+          {/* Equipment & colors */}
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-2 text-[11px] md:text-xs">
+              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-green-700">
+                <CheckCircle2 className="h-3 w-3" /> Climatisation
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-green-700">
+                <CheckCircle2 className="h-3 w-3" /> Bluetooth
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-green-700">
+                <CheckCircle2 className="h-3 w-3" /> ABS & Airbags
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-3 py-1 text-green-700">
+                <CheckCircle2 className="h-3 w-3" /> Direction assistée
+              </span>
+            </div>
+
+            {car.colors && car.colors.length > 0 && (
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Palette className="h-4 w-4 text-primary" />
+                  <span className="text-xs text-gray-500">Couleurs disponibles</span>
+                </div>
+                <div className="flex gap-1.5">
+                  {car.colors.map((color) => (
+                    <div
+                      key={color}
+                      className="h-5 w-5 rounded-full border border-gray-200 shadow-sm transition-transform duration-150 hover:scale-110"
+                      style={{ backgroundColor: color === 'blanc' ? '#ffffff' : '#000000' }}
+                      title={color}
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="flex gap-3">
-                <Button 
+            )}
+          </div>
+
+          {/* Footer actions */}
+          <div className="mt-3 flex flex-col gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-primary/5 px-4 py-3">
+              <div className="space-y-0.5">
+                <p className="text-xs font-medium text-gray-700">À partir de</p>
+                <p className="text-lg font-semibold text-primary">{car.price} MAD / jour</p>
+              </div>
+              <div className="flex gap-2">
+                <Button
                   onClick={() => handleWhatsAppClick(car)}
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 border-primary/40 text-primary hover:bg-primary hover:text-white"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
                   WhatsApp
                 </Button>
                 <Button
-                  onClick={() => setIsReservationModalOpen(true)}
+                  onClick={() => onReserve(car)}
                   size="sm"
+                  className="bg-primary text-white hover:bg-primary/90"
                 >
                   Réserver
                 </Button>
               </div>
             </div>
-          </div>
 
-          <div className="flex gap-2 mt-2 flex-wrap">
-            <Badge 
-              className="bg-blue-100 text-blue-800"
-              variant="outline" 
-            >
-              Disponible maintenant
-            </Badge>
-            <Badge
-              className="bg-green-100 text-green-800"
-              variant="outline"
-            >
-              +5jrs • Kilométrage illimité
-            </Badge>
+            <div className="flex flex-wrap gap-2 text-[11px] md:text-xs">
+              <Badge className="border-primary/20 bg-white text-primary" variant="outline">
+                Disponible maintenant
+              </Badge>
+              <Badge className="border-green-200 bg-green-50 text-green-700" variant="outline">
+                +5jrs • Kilométrage illimité
+              </Badge>
+            </div>
           </div>
         </div>
       </motion.div>
-    </>
   );
 };
+
+const ReservationPage = ({
+  car,
+  language,
+  onBack,
+}: {
+  car: Car;
+  language: Language;
+  onBack: () => void;
+}) => {
+  const t = translations[language]
+
+  return (
+    <section className="min-h-[calc(100vh-96px)] bg-slate-900/90 py-16 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto rounded-3xl bg-slate-900 shadow-2xl overflow-hidden border border-slate-800">
+        <div className="flex flex-col lg:flex-row">
+          {/* Left: Car image and summary */}
+          <div className="relative lg:w-1/2 h-64 lg:h-auto">
+            <Image
+              src={car.image}
+              alt={`${car.name} ${car.version} - Y-S car`}
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+
+            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 flex flex-col gap-3 text-white">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-white/60 mb-1">{t.cars?.title ?? 'Notre flotte'}</p>
+                  <h2 className="text-xl sm:text-2xl font-semibold leading-snug">{car.name}</h2>
+                  <p className="text-xs sm:text-sm text-white/60">{car.version} • {car.type}</p>
+                </div>
+                <div className="rounded-2xl bg-white/10 px-3 py-2 text-right">
+                  <p className="text-sm font-medium text-white">{car.price} MAD</p>
+                  <p className="text-[11px] text-white/70">/ jour</p>
+                </div>
+              </div>
+
+              <div className="mt-1 grid grid-cols-2 gap-2 text-[11px] sm:text-xs text-white/80">
+                <div className="flex items-center gap-2">
+                  <Armchair className="h-4 w-4 text-white" />
+                  <span>{car.seats} places</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Briefcase className="h-4 w-4 text-white" />
+                  <span>{car.luggage} bagages</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Gauge className="h-4 w-4 text-white" />
+                  <span>{car.transmission}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Fuel className="h-4 w-4 text-white" />
+                  <span className="capitalize">{car.fuel}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Reservation card */}
+          <div className="lg:w-1/2 bg-white p-6 sm:p-8 md:p-10 flex flex-col">
+            <div className="flex items-center justify-between mb-4">
+              <button
+                type="button"
+                onClick={onBack}
+                className="text-xs sm:text-sm text-gray-500 hover:text-gray-700 hover:underline"
+              >
+                ← Retour aux véhicules
+              </button>
+              <div className="text-right">
+                <p className="text-xs uppercase tracking-wide text-gray-400">Prix par jour</p>
+                <p className="text-xl font-semibold text-primary">{car.price} MAD</p>
+              </div>
+            </div>
+
+            <div className="mb-4">
+              <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-1">{car.name}</h1>
+              <p className="text-xs sm:text-sm text-gray-500">
+                {car.version} • {car.type}
+              </p>
+            </div>
+
+            <div className="mb-4 flex flex-wrap gap-2 text-[11px] sm:text-xs">
+              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-700">
+                <CheckCircle2 className="h-3 w-3 text-primary" /> Climatisation
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-700">
+                <CheckCircle2 className="h-3 w-3 text-primary" /> Bluetooth
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-700">
+                <CheckCircle2 className="h-3 w-3 text-primary" /> Assistance 24/7
+              </span>
+            </div>
+
+            <div className="mt-2 flex-1">
+              <ReservationForm car={car} onClose={onBack} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 const FilterSection = ({ onFilterChange }: { onFilterChange: (type: string, value: string) => void }) => {
   const [selectedFilter, setSelectedFilter] = useState('all')
@@ -443,7 +507,7 @@ const AirportShuttleSection = ({ language }: { language: Language }) => {
   
   const openWhatsApp = () => {
     const whatsappMessage = encodeURIComponent("Bonjour, je voudrais réserver un service de transport aéroport.")
-    const whatsappUrl = `https://wa.me/212648985150?text=${whatsappMessage}`
+    const whatsappUrl = `https://wa.me/212698969770?text=${whatsappMessage}`
     window.open(whatsappUrl, '_blank')
   }
 
@@ -559,13 +623,13 @@ const LocationSection = ({ language }: { language: Language }) => {
             </div>
 
             <div className="space-y-4">
-              <a href="tel:+212648985150" className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors">
+              <a href="tel:+212698969770" className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors">
                 <Phone className="w-5 h-5" />
-                <span>+212 666 666 666</span>
+                <span>+212 698-969770</span>
               </a>
-              <a href="mailto:locationmaroc@gmail.com" className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors">
+              <a href="mailto:y.scarlocationdevoitures@gmail.com" className="flex items-center space-x-3 text-gray-600 hover:text-primary transition-colors">
                 <Mail className="w-5 h-5" />
-                <span>locationmaroc@gmail.com</span>
+                <span>y.scarlocationdevoitures@gmail.com</span>
               </a>
             </div>
           </motion.div>
@@ -577,7 +641,7 @@ const LocationSection = ({ language }: { language: Language }) => {
             className="relative h-[450px] rounded-xl overflow-hidden shadow-lg"
           >
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6620.762637807761!2d-4.986539555953351!3d33.93131935879687!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd9f8b6da90a7f4f%3A0x4a9f848151d96b0!2zQcOpcm9wb3J0IGRlIEbDqHMtU2HDr3Nz!5e0!3m2!1sfr!2sma!4v1753700107254!5m2!1sfr!2sma"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1653.517793595848!2d-5.020898804028333!3d34.01729746331834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd9f8b5549004277%3A0x35b1ff4b13fce7a4!2sY-S%20car!5e0!3m2!1sen!2sma!4v1763289357959!5m2!1sen!2sma"
               width="800"
               height="600"
               style={{ border: 0 }}
@@ -627,15 +691,15 @@ const Navigation = ({ onPageChange, currentPage }: {
   }
 
   return (
-    <nav className="fixed w-full top-0 z-50 transition-all duration-300 bg-gray-100 shadow-sm">
-      <div className="container-fluid mx-auto px-8">
-        <div className="flex justify-between items-center h-24">
-          {/* Logo/Brand - Centered on mobile, left-aligned on desktop nnnn*/}
-          <div className="flex-1 flex items-center justify-center md:justify-start">
-            <div className="relative w-80 h-24">
+    <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-white/80 border-b border-white/30 shadow-sm">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="relative w-36 h-16">
               <Image
-                src="/Gelogo.png"
-                alt="Location Maroc Logo"
+                src="/yslogo.png"
+                alt="Y-S car Logo"
                 fill
                 className="object-contain"
                 priority
@@ -644,47 +708,47 @@ const Navigation = ({ onPageChange, currentPage }: {
             </div>
           </div>
 
-          {/* Phone Number - Mobile hidden, desktop shown */}
-          <div className="hidden md:flex items-center mx-8">
-            <a
-              href="tel:+212648456180"
-              className="flex items-center space-x-3 text-gray-700 font-medium text-base"
-            >
-              <Phone className="w-5 h-5 text-gray-600" />
-              <span>+212648456180</span>
-            </a>
-          </div>
-          
-          {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center space-x-10">
+          {/* Center nav links */}
+          <div className="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-700">
             <button
               onClick={() => onPageChange('home')}
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 ${currentPage === 'home' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+              className={`relative px-2 py-2 transition-colors ${currentPage === 'home' ? 'text-primary' : 'hover:text-primary'}`}
             >
               Home
+              {currentPage === 'home' && <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary rounded-full" />}
             </button>
             <button
               onClick={() => onPageChange('about')}
-              className={`px-6 py-3 font-medium text-base transition-all duration-200 ${currentPage === 'about' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}
+              className={`relative px-2 py-2 transition-colors ${currentPage === 'about' ? 'text-primary' : 'hover:text-primary'}`}
             >
               About
+              {currentPage === 'about' && <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary rounded-full" />}
             </button>
+          </div>
 
-            {/* Language Switcher - Desktop */}
+          {/* Right utilities */}
+          <div className="hidden md:flex items-center gap-6">
+            <a
+              href="tel:+212698969770"
+              className="flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:border-primary hover:text-primary"
+            >
+              <Phone className="w-4 h-4" />
+              <span>+212 698-969770</span>
+            </a>
+
             <div className="relative" ref={langMenuRef}>
               <button
                 onClick={toggleLang}
                 aria-expanded={isLangOpen}
                 aria-controls="language-menu"
                 aria-label="Select language"
-                className="flex items-center space-x-1 text-gray-700 hover:text-blue-600"
+                className="flex items-center gap-2 rounded-full border border-gray-200 bg-white/80 px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:border-primary hover:text-primary"
               >
-                <Globe className="w-5 h-5" />
-                <span className="font-medium">{currentLanguage.toUpperCase()}</span>
+                <Globe className="w-4 h-4" />
+                <span>{currentLanguage.toUpperCase()}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* Language Dropdown */}
               <AnimatePresence>
                 {isLangOpen && (
                   <motion.div
@@ -693,16 +757,17 @@ const Navigation = ({ onPageChange, currentPage }: {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 py-2 w-40 bg-white rounded-md shadow-lg border border-gray-100 z-50"
+                    className="absolute right-0 mt-2 w-40 rounded-2xl border border-gray-100 bg-white shadow-lg z-50"
                   >
                     {(['fr', 'en', 'ar'] as Language[]).map((lang) => (
                       <motion.button
                         key={lang}
                         role="menuitem"
                         onClick={() => handleLanguageChange(lang)}
-                        className={`w-full flex items-center px-4 py-2 hover:bg-gray-50 transition-all ${currentLanguage === lang ? 'text-blue-600 font-medium' : 'text-gray-700'}`}
+                        className={`w-full flex items-center justify-between px-4 py-2 text-sm hover:bg-primary/5 ${currentLanguage === lang ? 'text-primary font-semibold' : 'text-gray-700'}`}
                       >
-                        <span className="font-medium">{languageNames[lang]}</span>
+                        <span>{languageNames[lang]}</span>
+                        {currentLanguage === lang && <span>•</span>}
                       </motion.button>
                     ))}
                   </motion.div>
@@ -711,88 +776,118 @@ const Navigation = ({ onPageChange, currentPage }: {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile controls */}
+          <div className="flex items-center gap-3 md:hidden">
+            <a
+              href="tel:+212698969770"
+              className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-600"
+            >
+              <Phone className="w-4 h-4" />
+            </a>
             <button
               onClick={toggleMenu}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="p-2 text-gray-700 hover:text-blue-600"
+              className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-700"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              id="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md z-50 border-t border-gray-200"
-            >
-              <div className="py-2 divide-y divide-gray-100">
-                <div>
-                  <button
-                    onClick={() => {
-                      onPageChange('home')
-                      setIsMenuOpen(false)
-                    }}
-                    className={`w-full text-left px-6 py-3 ${currentPage === 'home' ? 'text-blue-600 font-medium' : 'text-gray-700'}`}
-                  >
-                    Home
-                  </button>
-                </div>
-                <div>
-                  <button
-                    onClick={() => {
-                      onPageChange('about')
-                      setIsMenuOpen(false)
-                    }}
-                    className={`w-full text-left px-6 py-3 ${currentPage === 'about' ? 'text-blue-600 font-medium' : 'text-gray-700'}`}
-                  >
-                    About
-                  </button>
-                </div>
-                
-                {/* Language options in mobile menu */}
-                <div className="px-6 py-3">
-                  <p className="text-sm text-gray-500 mb-2">Language</p>
-                  <div className="flex flex-wrap gap-2">
-                    {(['en', 'fr', 'ar'] as Language[]).map((lang) => (
-                      <button
-                        key={lang}
-                        onClick={() => {
-                          handleLanguageChange(lang)
-                          setIsMenuOpen(false)
-                        }}
-                        className={`px-3 py-1 rounded-md text-sm ${currentLanguage === lang ? 'bg-blue-100 text-blue-600 font-medium' : 'bg-gray-100 text-gray-700'}`}
-                      >
-                        {languageNames[lang]}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Phone number in mobile menu */}
-                <div className="px-6 py-3">
-                  <a
-                    href="tel:+212648456180"
-                    className="flex items-center space-x-2 text-gray-700"
-                  >
-                    <Phone className="w-5 h-5 text-gray-600" />
-                    <span>+212648456180</span>
-                  </a>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-md z-50 border-t border-gray-200"
+          >
+            <div className="py-4 space-y-4">
+              <button
+                onClick={() => {
+                  onPageChange('home')
+                  setIsMenuOpen(false)
+                }}
+                className={`w-full text-left px-4 py-2 ${currentPage === 'home' ? 'text-primary font-semibold' : 'text-gray-700'}`}
+              >
+                Home
+              </button>
+              <button
+                onClick={() => {
+                  onPageChange('about')
+                  setIsMenuOpen(false)
+                }}
+                className={`w-full text-left px-4 py-2 ${currentPage === 'about' ? 'text-primary font-semibold' : 'text-gray-700'}`}
+              >
+                About
+              </button>
+
+              {/* Language options in mobile menu */}
+              <div className="px-4 py-2">
+                <p className="text-sm text-gray-500 mb-2">Language</p>
+                <div className="flex flex-wrap gap-2">
+                  {(['en', 'fr', 'ar'] as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        handleLanguageChange(lang)
+                        setIsMenuOpen(false)
+                      }}
+                      className={`px-3 py-1 rounded-md text-sm ${currentLanguage === lang ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700'}`}
+                    >
+                      {languageNames[lang]}
+                    </button>
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+
+              {/* Phone number in mobile menu */}
+              <div className="px-4 py-2">
+                <a
+                  href="tel:+212698969770"
+                  className="flex items-center space-x-2 text-gray-700"
+                >
+                  <Phone className="w-5 h-5 text-gray-600" />
+                  <span>+212 698-969770</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Language Menu */}
+      <AnimatePresence>
+        {isLangOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute left-0 right-0 bg-white/95 backdrop-blur-xl shadow-lg border-t border-gray-100"
+          >
+            <div className="py-4 space-y-2">
+              {(['fr', 'en', 'ar'] as Language[]).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => {
+                    // onLanguageChange(lang)
+                    setIsLangOpen(false)
+                  }}
+                  className={`w-full flex justify-between items-center px-4 py-3 ${currentLanguage === lang ? 'text-primary font-semibold' : 'text-gray-700'}`}
+                >
+                  <span>{languageNames[lang]}</span>
+                  {currentLanguage === lang && <span>•</span>}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
@@ -814,7 +909,7 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
 📅 Date de début: ${startDate}
 📅 Date de fin: ${endDate}`;
 
-    const whatsappUrl = `https://wa.me/+212666666666?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/212698969770?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   }
 
@@ -824,8 +919,8 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/hiro.jpg"
-          alt="Flotte de voitures de location Ouail Car à Fès - Large choix de véhicules"
+          src="/yshero.jpg"
+          alt="Flotte de voitures de location Y-S car à Fès - Large choix de véhicules"
           fill
           priority
           className="object-cover"
@@ -838,7 +933,7 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
       {/* Hero Content */}
       <div className="relative container mx-auto px-4 h-screen flex flex-col justify-end py-24">
         {/* Text Content */}
-        <div className="flex-1 flex items-center justify-center mb-auto pt-16">
+        <div className="flex-1 flex items-center justify-center mb-auto pt-16 relative z-20">
           <div className="max-w-3xl mx-auto text-center text-white space-y-4 sm:space-y-6">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -863,7 +958,7 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="w-full max-w-5xl mx-auto mb-8 md:hidden"
+          className="w-full max-w-5xl mx-auto mb-8 md:hidden relative z-20"
         >
           <Button
             onClick={() => setShowMobileForm(!showMobileForm)}
@@ -875,12 +970,23 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
           </Button>
         </motion.div>
         
+        {/* Dark square backdrop for booking form */}
+        <div className="pointer-events-none absolute inset-x-4 top-16 bottom-0 flex justify-center z-10">
+          <div
+            className="w-full max-w-5xl h-full rounded-[42px] bg-slate-900/60 shadow-[0_45px_150px_rgba(0,0,0,0.55)]"
+            style={{
+              WebkitMaskImage: 'radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
+              maskImage: 'radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
+            }}
+          />
+        </div>
+        
         {/* Booking Form */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className={`w-full max-w-5xl mx-auto mb-16 ${showMobileForm ? 'block' : 'hidden md:block'}`}
+          className={`relative z-30 w-full max-w-5xl mx-auto mb-16 ${showMobileForm ? 'block' : 'hidden md:block'}`}
         >
           <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -1059,16 +1165,16 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="relative w-12 h-12">
                 <Image
-                  src="/gelogo.png"
-                  alt="Location Maroc Logo"
+                  src="/yslogo.png"
+                  alt="Y-S car Logo"
                   fill
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl font-bold">Location Maroc</h3>
+              <h3 className="text-xl font-bold">Y-S car</h3>
             </div>
             <p className="text-gray-400">
-              Votre partenaire de confiance pour la location de voitures à Tiznit
+              Votre partenaire de confiance pour la location de voitures à Fès
             </p>
           </motion.div>
 
@@ -1080,13 +1186,13 @@ const Footer = () => {
           >
             <h3 className="text-xl font-bold">Contact</h3>
             <div className="space-y-2">
-              <a href="tel:+212648985150" className="flex items-center space-x-2 text-gray-400 hover:text-white">
+              <a href="tel:+212698969770" className="flex items-center space-x-2 text-gray-400 hover:text-white">
                 <Phone className="w-4 h-4" />
-                <span>+212 666 666 666</span>
+                <span>+212 698-969770</span>
               </a>
-              <a href="mailto:locationmaroc@gmail.com" className="flex items-center space-x-2 text-gray-400 hover:text-white">
+              <a href="mailto:y.scarlocationdevoitures@gmail.com" className="flex items-center space-x-2 text-gray-400 hover:text-white">
                 <Mail className="w-5 h-5" />
-                <span>locationmaroc@gmail.com</span>
+                <span>y.scarlocationdevoitures@gmail.com</span>
               </a>
             </div>
           </motion.div>
@@ -1100,7 +1206,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold">Adresse</h3>
             <div className="flex items-start space-x-2 text-gray-400">
               <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
-              <span> 47 Rte de Sefrou, Fès 30070</span>
+              <span>Route Aïn Smen 6, 30040 Fès, Maroc</span>
             </div>
           </motion.div>
         </div>
@@ -1111,7 +1217,7 @@ const Footer = () => {
           transition={{ delay: 0.5 }}
           className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400"
         >
-          <p>&copy; {new Date().getFullYear()} Location Maroc. Tous droits réservés. Made by    
+          <p>&copy; {new Date().getFullYear()} Y-S car. Tous droits réservés. Made by    
 
             <a 
               href="https://wa.me/212666666666" 
@@ -1132,7 +1238,7 @@ const FloatingContactButtons = () => {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col gap-4 z-50">
       <a
-        href="https://wa.me/212666666666"
+        href="https://wa.me/212698969770"
         target="_blank"
         rel="noopener noreferrer"
         className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110"
@@ -1140,7 +1246,7 @@ const FloatingContactButtons = () => {
         <Phone className="w-6 h-6" />
       </a>
       <a
-        href="tel:+212648985150"
+        href="tel:+212698969770"
         className="bg-blue-500 hover:bg-blue-600 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110"
       >
         <Phone className="w-6 h-6" />
@@ -1154,196 +1260,30 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
   currentPage: string,
   language: Language,
 }) => {
-  const [isLangOpen, setIsLangOpen] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  
-  const toggleLang = () => setIsLangOpen(!isLangOpen)
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-  
   const t = translations[language]
 
   return (
     <div className="min-h-screen">
-      <nav className="fixed w-full top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-end items-center h-16">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button
-                onClick={() => onPageChange('home')}
-                className={`px-4 py-2 rounded-lg transition-all ${
-                  currentPage === 'home'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {t.navigation.home}
-              </button>
-              <button
-                onClick={() => onPageChange('about')}
-                className={`px-4 py-2 rounded-lg transition-all ${
-                  currentPage === 'about'
-                    ? 'bg-primary text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {t.navigation.about}
-              </button>
-
-              <div className="relative">
-                <button
-                  onClick={toggleLang}
-                  className="flex items-center space-x-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
-                >
-                  <Globe className="w-5 h-5" />
-                  <span className="uppercase font-medium">{language}</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                <AnimatePresence>
-                  {isLangOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      className="absolute right-0 mt-2 py-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100"
-                    >
-                      {(['fr', 'en', 'ar'] as Language[]).map((lang) => (
-                        <motion.button
-                          key={lang}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          onClick={() => {
-                            // onLanguageChange(lang)
-                            setIsLangOpen(false)
-                          }}
-                          className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-all ${
-                            language === lang ? 'text-primary font-semibold bg-primary/5' : 'text-gray-700'
-                          } ${lang === 'ar' ? 'text-right' : ''}`}
-                        >
-                          <span className="uppercase font-medium">{lang}</span>
-                          {language === lang && (
-                            <span className="ml-2 text-primary">✓</span>
-                          )}
-                        </motion.button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-4">
-              {/* Mobile Language Switcher */}
-              <button
-                onClick={toggleLang}
-                className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
-              >
-                <Globe className="w-6 h-6" />
-              </button>
-
-              <button
-                onClick={toggleMenu}
-                className="p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-all"
-              >
-                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden bg-white shadow-lg rounded-b-xl"
-              >
-                <div className="py-4 space-y-4">
-                  <button
-                    onClick={() => {
-                      onPageChange('home')
-                      setIsMenuOpen(false)
-                    }}
-                    className={`w-full text-left px-4 py-2 ${
-                      currentPage === 'home'
-                        ? 'bg-primary text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    {t.navigation.home}
-                  </button>
-                  <button
-                    onClick={() => {
-                      onPageChange('about')
-                      setIsMenuOpen(false)
-                    }}
-                    className={`w-full text-left px-4 py-2 ${
-                      currentPage === 'about'
-                        ? 'bg-primary text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    {t.navigation.about}
-                  </button>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Mobile Language Menu */}
-          <AnimatePresence>
-            {isLangOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="md:hidden absolute left-0 right-0 bg-white shadow-lg rounded-b-xl"
-              >
-                <div className="py-4 space-y-2">
-                  {(['fr', 'en', 'ar'] as Language[]).map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => {
-                        // onLanguageChange(lang)
-                        setIsLangOpen(false)
-                      }}
-                      className={`w-full flex justify-between items-center px-4 py-3 ${
-                        language === lang ? 'text-primary font-semibold bg-primary/5' : 'text-gray-700'
-                      } hover:bg-gray-50`}
-                    >
-                      <span className="uppercase font-medium">{lang}</span>
-                      {language === lang && (
-                        <span className="text-primary">✓</span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </nav>
+      <Navigation onPageChange={onPageChange} currentPage={currentPage} />
       
       <div className="pt-24 pb-16">
         {/* Hero Section */}
-        <div className="relative h-[50vh] bg-gradient-to-r from-primary/10 to-primary/5 mb-16">
-          <div className="container mx-auto px-4 h-full flex items-center">
-            <div className="max-w-3xl">
+        <div className="relative mb-16">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-white to-primary/5" />
+          <div className="container mx-auto px-4 py-12 md:py-20 relative flex items-center">
+            <div className="max-w-4xl">
               <motion.h1 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+                className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4 md:mb-6"
               >
                 {t.about.title} <span className="text-primary italic">{t.about.highlight}</span>
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-xl text-gray-600 leading-relaxed"
+                transition={{ delay: 0.15 }}
+                className="max-w-2xl text-base md:text-lg text-gray-600 leading-relaxed bg-white/70 backdrop-blur-sm border border-gray-100 rounded-2xl px-5 py-4 md:px-6 md:py-5 shadow-sm"
               >
                 {t.about.description}
               </motion.p>
@@ -1356,51 +1296,58 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
         <div className="container mx-auto px-4">
           {/* Location Maroc Section */}
           <div className="mb-20">
-            <div className="flex flex-col md:flex-row items-center gap-12">
-              {/* Image Section */}
-              <div className="w-full md:w-1/2 relative">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-xl">
-                  <Image 
-                    src="/cu.webp" 
-                    alt="Location Maroc - Location de voiture à Fès" 
-                    fill 
-                    className="object-cover" 
-                    priority
-                  />
+            <div className="mx-auto max-w-6xl rounded-3xl bg-white shadow-lg border border-gray-100 px-4 py-8 md:px-10 md:py-10">
+              <div className="flex flex-col md:flex-row items-center gap-10 lg:gap-14">
+                {/* Image Section */}
+                <div className="w-full md:w-1/2">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl ring-1 ring-gray-100">
+                    <Image 
+                      src="/cu.webp" 
+                      alt="Y-S car - Location de voiture à Fès" 
+                      fill 
+                      className="object-cover transition-transform duration-500 hover:scale-105" 
+                      priority
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              {/* Text Section */}
-              <div className="w-full md:w-1/2">
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7 }}
-                >
-                  <h2 className="text-4xl font-bold mb-6">
-                    <span className="text-purple-600">LOCATION VOITURE À FÈS</span> : LOUEZ VOTRE <br/>
-                    <span className="text-gray-700">VÉHICULE AU MEILLEUR PRIX</span>
-                  </h2>
-                  
-                  <p className="text-gray-600 mb-4">
-                    Chez <span className="font-semibold">Location Maroc</span>, nous vous proposons un service de location voiture à Fès simple, rapide et accessible dès 250dh/jour. Que vous recherchiez une citadine pratique pour circuler en ville, un SUV pour partir en aventure, ou un modèle compact pour plus de confort, nous avons le véhicule qu&#39;il vous faut.
-                  </p>
-                  
-                  <p className="text-gray-600 mb-6">
-                    Fès, des enseignes internationales telles que Hertz, Avis ou Sixt sont également présentes. Chez Location Maroc, nous privilégions une approche locale fondée sur la proximité, la transparence et des tarifs accessibles.
-                  </p>
-                  
-                  <p className="text-gray-600 mb-8">
-                    Notre objectif est de devenir votre référence pour toute location de voiture à Fès avec une flotte diversifiée et un service client à l&#39;écoute. Profitez de la livraison gratuite à l&#39;aéroport de Fès et réservez facilement via WhatsApp, sans paiement en ligne.
-                  </p>
-                  
-                  <Button 
-                    className="bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 px-8 py-3 rounded-md shadow-sm font-medium"
-                    onClick={() => window.open('https://wa.me/212648456180')}
+                
+                {/* Text Section */}
+                <div className="w-full md:w-1/2 space-y-5">
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
                   >
-                    Réserver votre véhicule
-                  </Button>
-                </motion.div>
+                    <h2 className="text-sm font-semibold tracking-[0.2em] text-primary mb-2 uppercase">Location voiture à Fès</h2>
+                    <p className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 mb-4">
+                      Louez votre véhicule au meilleur prix avec <span className="text-primary">Y-S car</span>
+                    </p>
+                    
+                    <div className="space-y-3 text-gray-600 text-sm md:text-base leading-relaxed">
+                      <p>
+                        Chez <span className="font-semibold">Y-S car</span>, nous vous proposons un service de location voiture à Fès simple, rapide et accessible dès 250dh/jour. Que vous recherchiez une citadine pratique pour circuler en ville, un SUV pour partir en aventure, ou un modèle compact pour plus de confort, nous avons le véhicule qu&#39;il vous faut.
+                      </p>
+                      <p>
+                        Fès, des enseignes internationales telles que Hertz, Avis ou Sixt sont également présentes. Chez Y-S car, nous privilégions une approche locale fondée sur la proximité, la transparence et des tarifs accessibles.
+                      </p>
+                      <p>
+                        Notre objectif est de devenir votre référence pour toute location de voiture à Fès avec une flotte diversifiée et un service client à l&#39;écoute. Profitez de la livraison gratuite à l&#39;aéroport de Fès et réservez facilement via WhatsApp, sans paiement en ligne.
+                      </p>
+                    </div>
+                    
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
+                      <Button 
+                        className="bg-primary text-white hover:bg-primary/90 px-7 py-3 rounded-full shadow-md"
+                        onClick={() => window.open('https://wa.me/212698969770')}
+                      >
+                        Réserver votre véhicule
+                      </Button>
+                      <span className="text-xs md:text-sm text-gray-500">
+                        Réponse rapide via WhatsApp • Confirmation en quelques minutes
+                      </span>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </div>
           </div>
@@ -1528,18 +1475,18 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               <a 
-                href="tel:+212648985150"
+                href="tel:+212698969770"
                 className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
               >
                 <Phone className="w-5 h-5" />
-                <span>+212648985150</span>
+                <span>+212 698-969770</span>
               </a>
               <a 
-                href="mailto:locationmaroc@gmail.com"
+                href="mailto:y.scarlocationdevoitures@gmail.com"
                 className="flex items-center space-x-2 px-6 py-3 bg-white text-primary rounded-lg hover:bg-gray-50 transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                <span>locationmaroc@gmail.com</span>
+                <span>y.scarlocationdevoitures@gmail.com</span>
               </a>
             </div>
           </motion.div>
@@ -1552,11 +1499,13 @@ const AboutPage = ({ onPageChange, currentPage, language }: {
 const MaqdisCarWebsite = () => {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedType, setSelectedType] = useState('all')
+  const [selectedCar, setSelectedCar] = useState<Car | null>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const { currentLanguage } = useLanguageSwitch()
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page)
+    setSelectedCar(null)
     window.scrollTo(0, 0)
   }
 
@@ -1566,6 +1515,11 @@ const MaqdisCarWebsite = () => {
   })
 
   const t = translations[currentLanguage]
+
+  const handleReserveCar = (car: Car) => {
+    setSelectedCar(car)
+    window.scrollTo(0, 0)
+  }
 
   return (
     <div ref={contentRef} className={`min-h-screen bg-white ${currentLanguage === 'ar' ? 'rtl' : 'ltr'}`}>
@@ -1582,44 +1536,54 @@ const MaqdisCarWebsite = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <HeroSection onPageChange={handlePageChange} currentPage={currentPage} language={currentLanguage} />
-            <section id="cars-section" className="py-24 px-4 md:px-8 bg-gray-50">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="max-w-7xl mx-auto mb-16">
-                  <h2 className="text-4xl font-bold mb-6 text-center text-gray-800 relative">
-                    <span className="relative inline-block">
-                      {t.cars.title}
-                      <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-primary rounded-full"></span>
-                    </span>
-                  </h2>
-                  <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">Découvrez les véhicules les plus appréciés par nos clients : citadines agiles, compactes confortables ou SUV robustes, chacun sélectionné pour son excellent rapport qualité/prix</p>
-                </div>
-                
-                <div className="mb-16">
-                  <FilterSection onFilterChange={(type, value) => setSelectedType(value)} />
-                </div>
+            {selectedCar ? (
+              <ReservationPage
+                car={selectedCar}
+                language={currentLanguage}
+                onBack={() => setSelectedCar(null)}
+              />
+            ) : (
+              <>
+                <HeroSection onPageChange={handlePageChange} currentPage={currentPage} language={currentLanguage} />
+                <section id="cars-section" className="py-24 px-4 md:px-8 bg-gray-50">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="max-w-7xl mx-auto mb-16">
+                      <h2 className="text-4xl font-bold mb-6 text-center text-gray-800 relative">
+                        <span className="relative inline-block">
+                          {t.cars.title}
+                          <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-primary rounded-full"></span>
+                        </span>
+                      </h2>
+                      <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">Découvrez les véhicules les plus appréciés par nos clients : citadines agiles, compactes confortables ou SUV robustes, chacun sélectionné pour son excellent rapport qualité/prix</p>
+                    </div>
+                    
+                    <div className="mb-16">
+                      <FilterSection onFilterChange={(type, value) => setSelectedType(value)} />
+                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                  {filteredCars.map((car, index) => (
-                    <motion.div
-                      key={car.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                    >
-                      <CarCard car={car} />
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </section>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                      {filteredCars.map((car, index) => (
+                        <motion.div
+                          key={car.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                        >
+                          <CarCard car={car} onReserve={handleReserveCar} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </section>
 
-            <AirportShuttleSection language={currentLanguage} />
-            <LocationSection language={currentLanguage} />
+                <AirportShuttleSection language={currentLanguage} />
+                <LocationSection language={currentLanguage} />
+              </>
+            )}
           </motion.div>
         ) : (
           <AboutPage 

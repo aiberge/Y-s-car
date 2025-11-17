@@ -2,30 +2,30 @@ export default function SchemaMarkup() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CarRental",
-    "name": "Location Maroc",
-    "image": "https://www.krilicar.com/Gelogo.png",
+    "name": "Y-S car",
+    "image": "https://www.krilicar.com/yslogo.png",
     "description": "Location de voitures à Fès et partout au Maroc. Prix compétitifs, large gamme de véhicules, service professionnel.",
     "@id": "https://www.krilicar.com",
     "url": "https://www.krilicar.com",
-    "telephone": "+212 648 985 150",
+    "telephone": "+212 698-969770",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+212 648 985 150",
+      "telephone": "+212 698-969770",
       "contactType": "customer service",
-      "email": "locationmaroc@gmail.com",
+      "email": "y.scarlocationdevoitures@gmail.com",
     },
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Avenue Mecque",
+      "streetAddress": "Route Aïn Smen 6",
       "addressLocality": "Fès",
       "addressRegion": "Fès-Meknès",
-      "postalCode": "30070",
+      "postalCode": "30040",
       "addressCountry": "MA"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 34.0367,
-      "longitude": -5.0003
+      "latitude": 34.01729746331834,
+      "longitude": -5.020898804028333
     },
     "openingHoursSpecification": [
       {

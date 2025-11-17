@@ -42,7 +42,7 @@ export async function GET() {
                 fontWeight: 'bold',
                 color: '#1a365d'
               }}>
-                Ouail Car
+                Y-S car
               </div>
               <div style={{ 
                 fontSize: '36px',

@@ -7,11 +7,21 @@ import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
+const SITE_URL = 'https://yscar-location.com'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://krilicar.com'),
-  title: 'Location Maroc - Location de voitures à Fès, Maroc',
-  description: 'Louez une voiture à Fès avec Location Maroc. Large choix de véhicules, prix compétitifs et service de qualité. Réservez votre voiture dès aujourd\'hui !',
-  keywords: ['location voiture Fès', 'louer voiture Maroc', 'Location Maroc', 'voiture pas cher Fès', 'location aéroport Fès'],
+  metadataBase: new URL(SITE_URL),
+  title: 'Y-S car | Location de voitures premium à Fès et partout au Maroc',
+  description: 'Y-S car propose une flotte récente de véhicules économiques, berlines et SUV avec livraison gratuite à l’aéroport de Fès. Réservation WhatsApp 24/7, tarifs transparents et kilométrage illimité.',
+  keywords: [
+    'location voiture Fès',
+    'Y-S car',
+    'location voiture Maroc',
+    'louer voiture aéroport Fès',
+    'voiture de location premium',
+    'SUV location Fès',
+    'kilométrage illimité Maroc'
+  ],
   alternates: {
     languages: {
       'fr': '/',
@@ -20,26 +30,26 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Location Maroc - Location de voitures à Fès, Maroc',
-    description: 'Louez une voiture à Fès avec Location Maroc. Large choix de véhicules, prix compétitifs et service de qualité. Réservez votre voiture dès aujourd\'hui !',
-    url: 'https://www.krilicar.com',
-    siteName: 'Location Maroc',
+    title: 'Y-S car | Location de voitures premium à Fès et partout au Maroc',
+    description: 'Réservez votre voiture avec Y-S car : large choix de modèles récents, assistance 24/7 et confirmation immédiate par WhatsApp.',
+    url: SITE_URL,
+    siteName: 'Y-S car',
     locale: 'fr_FR',
     type: 'website',
     images: [
       {
-        url: 'https://www.krilicar.com/Gelogo.png',
+        url: `${SITE_URL}/yslogo.png`,
         width: 800,
         height: 600,
-        alt: 'Location Maroc Logo',
+        alt: 'Y-S car Logo',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Location Maroc - Location de voitures à Fès, Maroc',
-    description: 'Louez une voiture à Fès avec Location Maroc. Large choix de véhicules, prix compétitifs et service de qualité. Réservez votre voiture dès aujourd\'hui !',
-    images: ['https://www.krilicar.com/Gelogo.png'],
+    title: 'Y-S car | Location de voitures premium à Fès et partout au Maroc',
+    description: 'Réservez une voiture récente avec Y-S car : tarifs transparents, livraison aéroport et support WhatsApp.',
+    images: [`${SITE_URL}/yslogo.png`],
   },
   robots: {
     index: true,
@@ -63,7 +73,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://krilicar.com" />
+        <link rel="canonical" href={SITE_URL} />
         <link rel="shortcut icon" href="/favicon.ico" sizes="512x512" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="512x512" />
         <link rel="apple-touch-icon" href="/favicon.ico" sizes="512x512" />
