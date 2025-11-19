@@ -1,11 +1,13 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useForm } from 'react-hook-form'
 import { Button } from "@/components/ui/button"
 import { Car } from '@/types'
 import 'react-phone-input-2/lib/style.css'
+import { translations } from '../translations/translations'
+import { Language } from '@/utils/language'
 
 // Next.js dynamic import type conflict with react-phone-input-2 component
 const PhoneInput = dynamic(() => import('react-phone-input-2'), {
@@ -16,9 +18,11 @@ const PhoneInput = dynamic(() => import('react-phone-input-2'), {
 interface ReservationFormProps {
   car: Car;
   onClose: () => void;
+  initialData?: Partial<ReservationFormData>;
+  language: Language;
 }
 
-interface FormData {
+export interface ReservationFormData {
   name: string;
   email: string;
   phone: string;
@@ -34,8 +38,11 @@ interface FormData {
 }
 
 const locations = [
-  { code: 'FEZ', name: 'Aéroport de Fès-Saïs - Route Aïn Smen 6, 30040 Fès, Maroc' },
-  { code: 'CFE', name: 'Fès-centre ville - Route Aïn Smen 6, 30040 Fès, Maroc' },
+  { code: 'CMN', name: 'Casablanca (CMN) – Aéroport Mohammed V' },
+  { code: 'RAK', name: 'Marrakech (RAK) – Aéroport Marrakech-Ménara' },
+  { code: 'RBA', name: 'Rabat (RBA) – Aéroport Rabat-Salé' },
+  { code: 'TNG', name: 'Tanger (TNG) – Aéroport Ibn Battouta' },
+  { code: 'FEZ', name: 'Fès (FEZ) – Aéroport Fès-Saïss' },
   { code: 'Autre', name: 'Autre lieu (à préciser)' }
 ];
 
@@ -46,15 +53,27 @@ const timeSlots = [
   '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
 ];
 
-export default function ReservationForm({ car, onClose }: ReservationFormProps) {
+export default function ReservationForm({ car, onClose, initialData, language }: ReservationFormProps) {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<ReservationFormData>({
+    defaultValues: initialData,
+  });
 
-  const [reviewData, setReviewData] = React.useState<FormData | null>(null);
+  const t = translations[language]
+  const reservationCopy = t.reservation ?? translations.en.reservation
+
+  useEffect(() => {
+    if (initialData) {
+      reset(initialData);
+    }
+  }, [initialData, reset]);
+
+  const [reviewData, setReviewData] = React.useState<ReservationFormData | null>(null);
 
   const startDate = watch('startDate');
   const endDate = watch('endDate');
@@ -84,6 +103,9 @@ export default function ReservationForm({ car, onClose }: ReservationFormProps) 
   const selectedReturnLocation = watch('returnLocation');
   const showCustomPickupLocation = selectedPickupLocation === 'Autre';
   const showCustomReturnLocation = selectedReturnLocation === 'Autre';
+  const requiresExtraFee = [selectedPickupLocation, selectedReturnLocation].some(
+    (location) => location && location !== 'FEZ'
+  );
 
   const resolveLocationName = (code?: string, customValue?: string) => {
     if (!code) return 'Non spécifié';
@@ -96,7 +118,7 @@ export default function ReservationForm({ car, onClose }: ReservationFormProps) 
     return time || 'Non spécifié';
   };
 
-  const buildReservationMessage = (data: FormData) => {
+  const buildReservationMessage = (data: ReservationFormData) => {
     return (
       "*Nouvelle Réservation*\n\n" +
       `*Voiture:* ${car.name}\n` +
@@ -122,7 +144,7 @@ export default function ReservationForm({ car, onClose }: ReservationFormProps) 
     return dailyRate * days;
   };
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: ReservationFormData) => {
     setReviewData(data);
   };
 
@@ -348,6 +370,13 @@ export default function ReservationForm({ car, onClose }: ReservationFormProps) 
             <p className="text-xs uppercase tracking-[0.3em] text-gray-400">Étape 2</p>
             <h3 className="text-lg font-semibold text-gray-900">Détails de votre trajet</h3>
           </div>
+
+          {requiresExtraFee && (
+            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+              <p className="font-semibold">{reservationCopy.extraFeeTitle}</p>
+              <p className="mt-1 text-amber-800">{reservationCopy.extraFeeDescription}</p>
+            </div>
+          )}
 
           <div className="grid gap-4 md:grid-cols-2">
             <div>

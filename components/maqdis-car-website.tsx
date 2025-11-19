@@ -27,7 +27,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { translations } from '../translations/translations'
-import ReservationForm from './ReservationForm'
+import ReservationForm, { ReservationFormData } from './ReservationForm'
 import { useLanguageSwitch, Language, languageNames } from '@/utils/language'
 
 // Define the Car type ---------
@@ -53,17 +53,17 @@ type Car = {
 const cars: Car[] = [
   {
     id: 2,
-    name: 'Dacia Logan diesel',
+    name: 'Dacia Logan ',
     version: 'Base',
     type: 'Économique',
     price: 250,
-    image: '/dacia.jpg',
+    image: '/1 (6).jpeg',
     featured: false,
     transmission: 'Manuelle',
     seats: 5,
     luggage: 3,
     airConditioning: true,
-    fuel: 'diesel',
+    fuel: 'essence',
     maxSpeed: 170,
     trunkSize: 510,
     colors: ['blanc', 'noir']
@@ -91,7 +91,7 @@ const cars: Car[] = [
     version: 'Premium',
     type: 'Berline',
     price: 300,
-    image: '/c3.jpg',
+    image: '/1 (5).jpeg',
     featured: false,
     transmission: 'Automatique',
     seats: 5,
@@ -103,29 +103,12 @@ const cars: Car[] = [
     colors: ['blanc', 'noir']
   },
   {
-    id: 9,
-    name: 'Dacia Logan essence',
-    version: 'Base',
-    type: 'Économique',
-    price: 250,
-    image: '/dacia.jpg',
-    featured: false,
-    transmission: 'Manuelle',
-    seats: 5,
-    luggage: 3,
-    airConditioning: true,
-    fuel: 'essence',
-    maxSpeed: 170,
-    trunkSize: 510,
-    colors: ['blanc', 'noir']
-  },
-  {
     id: 8,
     name: 'Renault Clio 5 automatique',
     version: 'Base',
     type: 'Économique',
     price: 350,
-    image: '/clio24.jpg',
+    image: '/1 (4).jpeg',
     featured: true,
     transmission: 'Automatique',
     seats: 5,
@@ -142,7 +125,7 @@ const cars: Car[] = [
     version: 'Premium',
     type: 'Berline',
     price: 300,
-    image: '/208.jpeg',
+    image: '/1 (7).jpeg',
     featured: false,
     transmission: 'Automatique',
     seats: 5,
@@ -159,7 +142,7 @@ const cars: Car[] = [
     version: 'Base',
     type: 'Économique',
     price: 300,
-    image: '/clio24.jpg',
+    image: '/1 (4).jpeg',
     featured: true,
     transmission: 'Automatique',
     seats: 5,
@@ -176,7 +159,7 @@ const cars: Car[] = [
     version: 'Premium',
     type: 'Berline',
     price: 350,
-    image: '/cap.webp',
+    image: '/1 (1).jpeg',
     featured: false,
     transmission: 'Automatique',
     seats: 5,
@@ -193,7 +176,7 @@ const cars: Car[] = [
     version: 'Premium',
     type: 'Berline',
     price: 350,
-    image: '/208g.avif',
+    image: '/1 (3).jpeg',
     featured: false,
     transmission: 'Automatique',
     seats: 5,
@@ -207,10 +190,22 @@ const cars: Car[] = [
 ];
 
 const airports = [
-  { code: 'FEZ', name: 'Aéroport de Fès-Saïs - Route de Sefrou, Fès 30000' },
-  { code: 'CFE', name: 'Fès-centre ville - 47 Rte de Sefrou, Fès 30000' },
+  { code: 'CMN', name: 'Casablanca (CMN) – Aéroport Mohammed V' },
+  { code: 'RAK', name: 'Marrakech (RAK) – Aéroport Marrakech-Ménara' },
+  { code: 'RBA', name: 'Rabat (RBA) – Aéroport Rabat-Salé' },
+  { code: 'TNG', name: 'Tanger (TNG) – Aéroport Ibn Battouta' },
+  { code: 'FEZ', name: 'Fès (FEZ) – Aéroport Fès-Saïss' },
   { code: 'Autre', name: 'Autre lieu (à préciser)' }
 ]
+
+type HeroFormSubmission = {
+  departureAgency: string;
+  customDepartureAgency: string;
+  returnAgency: string;
+  customReturnAgency: string;
+  startDate: string;
+  endDate: string;
+}
 
 const CarCard = ({ car, onReserve }: { car: Car; onReserve: (car: Car) => void }) => {
   const handleWhatsAppClick = (car: Car) => {
@@ -368,10 +363,12 @@ const ReservationPage = ({
   car,
   language,
   onBack,
+  initialData,
 }: {
   car: Car;
   language: Language;
   onBack: () => void;
+  initialData?: Partial<ReservationFormData>;
 }) => {
   const t = translations[language]
 
@@ -459,7 +456,7 @@ const ReservationPage = ({
             </div>
 
             <div className="mt-2 flex-1">
-              <ReservationForm car={car} onClose={onBack} />
+              <ReservationForm car={car} onClose={onBack} initialData={initialData} language={language} />
             </div>
           </div>
         </div>
@@ -892,7 +889,7 @@ const Navigation = ({ onPageChange, currentPage }: {
   )
 }
 
-const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (page: string) => void, currentPage: string, language: Language }) => {
+const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: { onPageChange: (page: string) => void, currentPage: string, language: Language, onBookingRequest: (data: HeroFormSubmission) => void }) => {
   const [departureAgency, setDepartureAgency] = useState('')
   const [returnAgency, setReturnAgency] = useState('')
   const [customDepartureAgency, setCustomDepartureAgency] = useState('')
@@ -902,15 +899,15 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
   const [showMobileForm, setShowMobileForm] = useState(false)
 
   const handleBooking = () => {
-    const message = `Bonjour, je souhaite réserver une voiture avec les détails suivants:
-
-🛫 Départ: ${departureAgency === 'Autre' ? customDepartureAgency : airports.find(a => a.code === departureAgency)?.name || ''}
-🛬 Retour: ${returnAgency === 'Autre' ? customReturnAgency : airports.find(a => a.code === returnAgency)?.name || ''}
-📅 Date de début: ${startDate}
-📅 Date de fin: ${endDate}`;
-
-    const whatsappUrl = `https://wa.me/212698969770?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    onBookingRequest({
+      departureAgency,
+      customDepartureAgency,
+      returnAgency,
+      customReturnAgency,
+      startDate,
+      endDate,
+    })
+    setShowMobileForm(false)
   }
 
   const t = translations[language]
@@ -935,13 +932,23 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
         {/* Text Content */}
         <div className="flex-1 flex items-center justify-center mb-auto pt-16 relative z-20">
           <div className="max-w-3xl mx-auto text-center text-white space-y-4 sm:space-y-6">
-            <motion.h1 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              className="mx-auto"
             >
-              {t.hero.title}
-            </motion.h1>
+              <div className="relative w-96 h-40 sm:w-[32rem] sm:h-48 mx-auto">
+                <Image
+                  src="/yslogo.png"
+                  alt="Y-S car logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  quality={100}
+                />
+                <span className="sr-only">{t.hero.title}</span>
+              </div>
+            </motion.div>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -988,128 +995,130 @@ const HeroSection = ({ onPageChange, currentPage, language }: { onPageChange: (p
           transition={{ delay: 0.6 }}
           className={`relative z-30 w-full max-w-5xl mx-auto mb-16 ${showMobileForm ? 'block' : 'hidden md:block'}`}
         >
-          <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-200">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              {/* Departure Selection */}
-              <div className="col-span-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1">
-                  {t.hero.departure || 'Departure'}
-                </label>
-                <div className="relative">
-                  {departureAgency === 'Autre' ? (
+          <div className="bg-white/95 rounded-2xl p-6 shadow-[0_25px_70px_rgba(15,23,42,0.25)] border border-white/60 backdrop-blur">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Departure + Start Date */}
+              <div className="space-y-4 p-4 rounded-xl border border-slate-100 bg-slate-50/90 shadow-inner">
+                <div>
+                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                    {t.hero.departure || 'Departure'}
+                  </label>
+                  <div className="relative">
+                    {departureAgency === 'Autre' ? (
+                      <input
+                        type="text"
+                        value={customDepartureAgency}
+                        onChange={(e) => setCustomDepartureAgency(e.target.value)}
+                        placeholder={t.hero.enterDeparture}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
+                                 text-sm transition-colors"
+                      />
+                    ) : (
+                      <select
+                        value={departureAgency}
+                        onChange={(e) => {
+                          setDepartureAgency(e.target.value)
+                          if (e.target.value === 'Autre') {
+                            setCustomDepartureAgency('')
+                          }
+                        }}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
+                                 text-sm transition-colors appearance-none"
+                      >
+                        <option value="">{t.hero.selectDeparture}</option>
+                        {airports.map((airport) => (
+                          <option key={airport.code} value={airport.code}>
+                            {airport.name}
+                          </option>
+                        ))}
+                        <option value="Autre">Autre</option>
+                      </select>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                    {t.hero.startDate || 'Start Date'}
+                  </label>
+                  <div className="relative">
                     <input
-                      type="text"
-                      value={customDepartureAgency}
-                      onChange={(e) => setCustomDepartureAgency(e.target.value)}
-                      placeholder={t.hero.enterDeparture}
-                      className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                               border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                               text-sm transition-colors"
-                    />
-                  ) : (
-                    <select
-                      value={departureAgency}
+                      type="date"
+                      value={startDate}
                       onChange={(e) => {
-                        setDepartureAgency(e.target.value)
-                        if (e.target.value === 'Autre') {
-                          setCustomDepartureAgency('')
+                        setStartDate(e.target.value)
+                        if (new Date(e.target.value) > new Date(endDate)) {
+                          setEndDate(e.target.value)
                         }
                       }}
-                      className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                               border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                               text-sm transition-colors appearance-none"
-                    >
-                      <option value="">{t.hero.selectDeparture}</option>
-                      {airports.map((airport) => (
-                        <option key={airport.code} value={airport.code}>
-                          {airport.name}
-                        </option>
-                      ))}
-                      <option value="Autre">Autre</option>
-                    </select>
-                  )}
+                      min={new Date().toISOString().split('T')[0]}
+                      className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent 
+                                text-sm transition-colors"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Return Selection */}
-              <div className="col-span-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1">
-                  {t.hero.return || 'Return'}
-                </label>
-                <div className="relative">
-                  {returnAgency === 'Autre' ? (
-                    <input
-                      type="text"
-                      value={customReturnAgency}
-                      onChange={(e) => setCustomReturnAgency(e.target.value)}
-                      placeholder={t.hero.enterReturn}
-                      className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                               border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                               text-sm transition-colors"
-                    />
-                  ) : (
-                    <select
-                      value={returnAgency}
-                      onChange={(e) => {
-                        setReturnAgency(e.target.value)
-                        if (e.target.value === 'Autre') {
-                          setCustomReturnAgency('')
-                        }
-                      }}
-                      className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                               border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                               text-sm transition-colors appearance-none"
-                    >
-                      <option value="">{t.hero.selectReturn}</option>
-                      {airports.map((airport) => (
-                        <option key={airport.code} value={airport.code}>
-                          {airport.name}
-                        </option>
-                      ))}
-                      <option value="Autre">Autre</option>
-                    </select>
-                  )}
+              {/* Return + End Date */}
+              <div className="space-y-4 p-4 rounded-xl border border-slate-100 bg-slate-50/90 shadow-inner">
+                <div>
+                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                    {t.hero.return || 'Return'}
+                  </label>
+                  <div className="relative">
+                    {returnAgency === 'Autre' ? (
+                      <input
+                        type="text"
+                        value={customReturnAgency}
+                        onChange={(e) => setCustomReturnAgency(e.target.value)}
+                        placeholder={t.hero.enterReturn}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
+                                 text-sm transition-colors"
+                      />
+                    ) : (
+                      <select
+                        value={returnAgency}
+                        onChange={(e) => {
+                          setReturnAgency(e.target.value)
+                          if (e.target.value === 'Autre') {
+                            setCustomReturnAgency('')
+                          }
+                        }}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
+                                 text-sm transition-colors appearance-none"
+                      >
+                        <option value="">{t.hero.selectReturn}</option>
+                        {airports.map((airport) => (
+                          <option key={airport.code} value={airport.code}>
+                            {airport.name}
+                          </option>
+                        ))}
+                        <option value="Autre">Autre</option>
+                      </select>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              {/* Start Date Selection */}
-              <div className="col-span-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1">
-                  {t.hero.startDate || 'Start Date'}
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => {
-                      setStartDate(e.target.value)
-                      if (new Date(e.target.value) > new Date(endDate)) {
-                        setEndDate(e.target.value)
-                      }
-                    }}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                              border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                              text-sm transition-colors"
-                  />
-                </div>
-              </div>
-              
-              {/* End Date Selection */}
-              <div className="col-span-1">
-                <label className="block text-gray-700 text-sm font-medium mb-1">
-                  {t.hero.endDate || 'End Date'}
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    min={startDate}
-                    className="w-full px-3 py-2 rounded-md bg-white text-gray-800 
-                              border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                              text-sm transition-colors"
-                  />
+                <div>
+                  <label className="block text-gray-700 text-sm font-medium mb-1">
+                    {t.hero.endDate || 'End Date'}
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      min={startDate}
+                      className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent 
+                                text-sm transition-colors"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -1500,7 +1509,9 @@ const MaqdisCarWebsite = () => {
   const [currentPage, setCurrentPage] = useState('home')
   const [selectedType, setSelectedType] = useState('all')
   const [selectedCar, setSelectedCar] = useState<Car | null>(null)
+  const [heroFormData, setHeroFormData] = useState<Partial<ReservationFormData>>({})
   const contentRef = useRef<HTMLDivElement>(null)
+  const carsSectionRef = useRef<HTMLElement | null>(null)
   const { currentLanguage } = useLanguageSwitch()
 
   const handlePageChange = (page: string) => {
@@ -1515,6 +1526,19 @@ const MaqdisCarWebsite = () => {
   })
 
   const t = translations[currentLanguage]
+
+  const handleHeroBooking = (formValues: HeroFormSubmission) => {
+    setHeroFormData({
+      pickupLocation: formValues.departureAgency,
+      customPickupLocation: formValues.departureAgency === 'Autre' ? formValues.customDepartureAgency : undefined,
+      returnLocation: formValues.returnAgency,
+      customReturnLocation: formValues.returnAgency === 'Autre' ? formValues.customReturnAgency : undefined,
+      startDate: formValues.startDate,
+      endDate: formValues.endDate,
+    })
+
+    carsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   const handleReserveCar = (car: Car) => {
     setSelectedCar(car)
@@ -1541,24 +1565,25 @@ const MaqdisCarWebsite = () => {
                 car={selectedCar}
                 language={currentLanguage}
                 onBack={() => setSelectedCar(null)}
+                initialData={heroFormData}
               />
             ) : (
               <>
-                <HeroSection onPageChange={handlePageChange} currentPage={currentPage} language={currentLanguage} />
-                <section id="cars-section" className="py-24 px-4 md:px-8 bg-gray-50">
+                <HeroSection onPageChange={handlePageChange} currentPage={currentPage} language={currentLanguage} onBookingRequest={handleHeroBooking} />
+                <section id="cars-section" ref={carsSectionRef} className="py-24 px-4 md:px-8 bg-slate-900">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
                     <div className="max-w-7xl mx-auto mb-16">
-                      <h2 className="text-4xl font-bold mb-6 text-center text-gray-800 relative">
+                      <h2 className="text-4xl font-bold mb-6 text-center text-white relative">
                         <span className="relative inline-block">
                           {t.cars.title}
                           <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-primary rounded-full"></span>
                         </span>
                       </h2>
-                      <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">Découvrez les véhicules les plus appréciés par nos clients : citadines agiles, compactes confortables ou SUV robustes, chacun sélectionné pour son excellent rapport qualité/prix</p>
+                      <p className="text-center text-gray-300 max-w-2xl mx-auto mb-12">Découvrez les véhicules les plus appréciés par nos clients : citadines agiles, compactes confortables ou SUV robustes, chacun sélectionné pour son excellent rapport qualité/prix</p>
                     </div>
                     
                     <div className="mb-16">

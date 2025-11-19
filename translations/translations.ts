@@ -43,6 +43,10 @@ export const translations = {
       bookNow: 'Book Now',
       startingFrom: 'Starting from',
     },
+    reservation: {
+      extraFeeTitle: 'Extra fee (negotiable)',
+      extraFeeDescription: 'Pick-up or drop-off outside Fès-Saïs airport may incur an additional, negotiable fee. We will confirm the amount with you on WhatsApp.',
+    },
     location: {
       title: 'Our Location',
       subtitle: 'Find Us Here',
@@ -128,6 +132,10 @@ export const translations = {
       bookNow: 'Réserver Maintenant',
       startingFrom: 'À partir de',
     },
+    reservation: {
+      extraFeeTitle: 'Frais supplémentaires (négociables)',
+      extraFeeDescription: 'Une prise en charge ou un retour hors de l’aéroport de Fès-Saïss peut entraîner des frais additionnels négociables. Nous confirmerons le montant avec vous sur WhatsApp.',
+    },
     location: {
       title: 'Notre Emplacement',
       subtitle: 'Retrouvez-nous Ici',
@@ -212,6 +220,10 @@ export const translations = {
       personalService: 'خدمة شخصية',
       bookNow: 'احجز الآن',
       startingFrom: 'يبدأ من',
+    },
+    reservation: {
+      extraFeeTitle: 'رسوم إضافية (قابلة للتفاوض)',
+      extraFeeDescription: 'قد تُطبق رسوم إضافية قابلة للتفاوض عند الاستلام أو الإرجاع خارج مطار فاس سايس. سنؤكد المبلغ معك عبر واتساب.',
     },
     location: {
       title: 'موقعنا',
