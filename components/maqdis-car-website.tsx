@@ -63,7 +63,7 @@ const cars: Car[] = [
     seats: 5,
     luggage: 3,
     airConditioning: true,
-    fuel: 'essence',
+    fuel: 'diesel',
     maxSpeed: 170,
     trunkSize: 510,
     colors: ['blanc', 'noir']
@@ -93,7 +93,7 @@ const cars: Car[] = [
     price: 300,
     image: '/1 (5).jpeg',
     featured: false,
-    transmission: 'Automatique',
+    transmission: 'Manuelle',
     seats: 5,
     luggage: 4,
     airConditioning: true,
@@ -127,7 +127,7 @@ const cars: Car[] = [
     price: 300,
     image: '/1 (7).jpeg',
     featured: false,
-    transmission: 'Automatique',
+    transmission: 'Manuelle',
     seats: 5,
     luggage: 4,
     airConditioning: true,
@@ -144,11 +144,11 @@ const cars: Car[] = [
     price: 300,
     image: '/1 (4).jpeg',
     featured: true,
-    transmission: 'Automatique',
+    transmission: 'Manuelle',
     seats: 5,
     luggage: 2,
     airConditioning: true,
-    fuel: 'essence',
+    fuel: 'diesel',
     maxSpeed: 180,
     trunkSize: 391,
     colors: ['blanc', 'noir']
@@ -161,7 +161,7 @@ const cars: Car[] = [
     price: 350,
     image: '/1 (1).jpeg',
     featured: false,
-    transmission: 'Automatique',
+    transmission: 'Manuelle',
     seats: 5,
     luggage: 4,
     airConditioning: true,
@@ -178,7 +178,7 @@ const cars: Car[] = [
     price: 350,
     image: '/1 (3).jpeg',
     featured: false,
-    transmission: 'Automatique',
+    transmission: 'Manuelle',
     seats: 5,
     luggage: 4,
     airConditioning: true,
@@ -205,6 +205,8 @@ type HeroFormSubmission = {
   customReturnAgency: string;
   startDate: string;
   endDate: string;
+  startTime: string;
+  endTime: string;
 }
 
 const CarCard = ({ car, onReserve }: { car: Car; onReserve: (car: Car) => void }) => {
@@ -896,6 +898,8 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
   const [customReturnAgency, setCustomReturnAgency] = useState('')
   const [startDate, setStartDate] = useState(new Date().toISOString().split('T')[0])
   const [endDate, setEndDate] = useState(new Date().toISOString().split('T')[0])
+  const [startTime, setStartTime] = useState('09:00')
+  const [endTime, setEndTime] = useState('10:00')
   const [showMobileForm, setShowMobileForm] = useState(false)
 
   const handleBooking = () => {
@@ -906,6 +910,8 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
       customReturnAgency,
       startDate,
       endDate,
+      startTime,
+      endTime,
     })
     setShowMobileForm(false)
   }
@@ -916,7 +922,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
     <section className="relative h-screen">
       <div className="absolute inset-0">
         <Image
-          src="/yshero.jpg"
+          src="/lhero.jpeg"
           alt="Flotte de voitures de location Y-S car à Fès - Large choix de véhicules"
           fill
           priority
@@ -929,36 +935,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
       
       {/* Hero Content */}
       <div className="relative container mx-auto px-4 h-screen flex flex-col justify-end py-24">
-        {/* Text Content */}
-        <div className="flex-1 flex items-center justify-center mb-auto pt-16 relative z-20">
-          <div className="max-w-3xl mx-auto text-center text-white space-y-4 sm:space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mx-auto"
-            >
-              <div className="relative w-96 h-40 sm:w-[32rem] sm:h-48 mx-auto">
-                <Image
-                  src="/yslogo.png"
-                  alt="Y-S car logo"
-                  fill
-                  className="object-contain"
-                  priority
-                  quality={100}
-                />
-                <span className="sr-only">{t.hero.title}</span>
-              </div>
-            </motion.div>
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto"
-            >
-              {t.hero.description}
-            </motion.p>
-          </div>
-        </div>
+        {/* Text Content intentionally removed as per request */}
         
         {/* Mobile Reserve Button */}
         <motion.div
@@ -976,17 +953,6 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
             {showMobileForm ? (t.hero.hideForm || 'Masquer le formulaire') : (t.hero.reserveNow || 'Réserver maintenant')}
           </Button>
         </motion.div>
-        
-        {/* Dark square backdrop for booking form */}
-        <div className="pointer-events-none absolute inset-x-4 top-16 bottom-0 flex justify-center z-10">
-          <div
-            className="w-full max-w-5xl h-full rounded-[42px] bg-slate-900/60 shadow-[0_45px_150px_rgba(0,0,0,0.55)]"
-            style={{
-              WebkitMaskImage: 'radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
-              maskImage: 'radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)'
-            }}
-          />
-        </div>
         
         {/* Booking Form */}
         <motion.div 
@@ -1043,21 +1009,39 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                   <label className="block text-gray-700 text-sm font-medium mb-1">
                     {t.hero.startDate || 'Start Date'}
                   </label>
-                  <div className="relative">
-                    <input
-                      type="date"
-                      value={startDate}
-                      onChange={(e) => {
-                        setStartDate(e.target.value)
-                        if (new Date(e.target.value) > new Date(endDate)) {
-                          setEndDate(e.target.value)
-                        }
-                      }}
-                      min={new Date().toISOString().split('T')[0]}
-                      className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
-                                border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent 
-                                text-sm transition-colors"
-                    />
+                  <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
+                    <div className="relative">
+                      <input
+                        type="date"
+                        value={startDate}
+                        onChange={(e) => {
+                          setStartDate(e.target.value)
+                          if (new Date(e.target.value) > new Date(endDate)) {
+                            setEndDate(e.target.value)
+                          }
+                        }}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400/70 focus:border-transparent 
+                                  text-sm sm:text-base transition-colors"
+                      />
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="time"
+                        aria-label="Start time"
+                        value={startTime}
+                        onChange={(e) => {
+                          setStartTime(e.target.value)
+                          if (startDate === endDate && e.target.value > endTime) {
+                            setEndTime(e.target.value)
+                          }
+                        }}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400/70 focus:border-transparent 
+                                  text-sm sm:text-base transition-colors"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1108,16 +1092,40 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                   <label className="block text-gray-700 text-sm font-medium mb-1">
                     {t.hero.endDate || 'End Date'}
                   </label>
-                  <div className="relative">
-                    <input
-                      type="date"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      min={startDate}
-                      className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
-                                border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent 
-                                text-sm transition-colors"
-                    />
+                  <div className="grid grid-cols-1 min-[420px]:grid-cols-2 gap-3">
+                    <div className="relative">
+                      <input
+                        type="date"
+                        value={endDate}
+                        onChange={(e) => {
+                          setEndDate(e.target.value)
+                          if (e.target.value < startDate) {
+                            setStartDate(e.target.value)
+                          }
+                        }}
+                        min={startDate}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400/70 focus:border-transparent 
+                                  text-sm sm:text-base transition-colors"
+                      />
+                    </div>
+                    <div className="relative">
+                      <input
+                        type="time"
+                        aria-label="End time"
+                        value={endTime}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (startDate === endDate && value < startTime) {
+                            setStartTime(value)
+                          }
+                          setEndTime(value)
+                        }}
+                        className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
+                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400/70 focus:border-transparent 
+                                  text-sm sm:text-base transition-colors"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1130,7 +1138,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                 className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-2.5 
                           rounded-md text-sm font-medium transition-all shadow-md
                           duration-200 disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto"
-                disabled={!departureAgency || !returnAgency || !startDate || !endDate}
+                disabled={!departureAgency || !returnAgency || !startDate || !endDate || !startTime || !endTime}
               >
                 {t.hero.bookNow || 'Book Now'}
               </Button>
@@ -1535,6 +1543,8 @@ const MaqdisCarWebsite = () => {
       customReturnLocation: formValues.returnAgency === 'Autre' ? formValues.customReturnAgency : undefined,
       startDate: formValues.startDate,
       endDate: formValues.endDate,
+      startTime: formValues.startTime,
+      endTime: formValues.endTime,
     })
 
     carsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -1570,7 +1580,7 @@ const MaqdisCarWebsite = () => {
             ) : (
               <>
                 <HeroSection onPageChange={handlePageChange} currentPage={currentPage} language={currentLanguage} onBookingRequest={handleHeroBooking} />
-                <section id="cars-section" ref={carsSectionRef} className="py-24 px-4 md:px-8 bg-slate-900">
+                <section id="cars-section" ref={carsSectionRef} className="py-24 px-4 md:px-8 bg-gray-800">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
