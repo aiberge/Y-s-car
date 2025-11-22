@@ -919,7 +919,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
   const t = translations[language]
 
   return (
-    <section className="relative h-screen">
+    <section className="relative min-h-screen pt-24 md:pt-28 pb-12">
       <div className="absolute inset-0">
         <Image
           src="/lhero.jpeg"
@@ -934,7 +934,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
       <Navigation onPageChange={onPageChange} currentPage={currentPage} />
       
       {/* Hero Content */}
-      <div className="relative container mx-auto px-4 h-screen flex flex-col justify-end py-24">
+      <div className="relative container mx-auto px-4 min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-7rem)] flex flex-col justify-end gap-6 pb-12">
         {/* Text Content intentionally removed as per request */}
         
         {/* Mobile Reserve Button */}
@@ -959,12 +959,12 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className={`relative z-30 w-full max-w-5xl mx-auto mb-16 ${showMobileForm ? 'block' : 'hidden md:block'}`}
+          className={`relative z-30 w-full max-w-5xl mx-auto mb-6 sm:mb-10 ${showMobileForm ? 'block' : 'hidden md:block'}`}
         >
-          <div className="bg-white/95 rounded-2xl p-6 shadow-[0_25px_70px_rgba(15,23,42,0.25)] border border-white/60 backdrop-blur">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white/95 rounded-2xl p-4 sm:p-6 shadow-[0_25px_70px_rgba(15,23,42,0.25)] border border-white/60 backdrop-blur">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
               {/* Departure + Start Date */}
-              <div className="space-y-4 p-4 rounded-xl border border-slate-100 bg-slate-50/90 shadow-inner">
+              <div className="space-y-3 sm:space-y-4 p-3 sm:p-4 rounded-xl border border-slate-200/80 bg-white/90 shadow-sm">
                 <div>
                   <label className="block text-gray-700 text-sm font-medium mb-1">
                     {t.hero.departure || 'Departure'}
@@ -978,7 +978,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                         placeholder={t.hero.enterDeparture}
                         className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
-                                 text-sm transition-colors"
+                                 text-sm sm:text-base transition-colors"
                       />
                     ) : (
                       <select
@@ -991,7 +991,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                         }}
                         className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
-                                 text-sm transition-colors appearance-none"
+                                 text-sm sm:text-base transition-colors appearance-none"
                       >
                         <option value="">{t.hero.selectDeparture}</option>
                         {airports.map((airport) => (
@@ -1047,7 +1047,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
               </div>
 
               {/* Return + End Date */}
-              <div className="space-y-4 p-4 rounded-xl border border-slate-100 bg-slate-50/90 shadow-inner">
+              <div className="space-y-3 sm:space-y-4 p-3 sm:p-4 rounded-xl border border-slate-200/80 bg-white/90 shadow-sm">
                 <div>
                   <label className="block text-gray-700 text-sm font-medium mb-1">
                     {t.hero.return || 'Return'}
@@ -1061,7 +1061,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                         placeholder={t.hero.enterReturn}
                         className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
-                                 text-sm transition-colors"
+                                 text-sm sm:text-base transition-colors"
                       />
                     ) : (
                       <select
@@ -1074,7 +1074,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
                         }}
                         className="w-full px-3 py-2.5 rounded-lg bg-white text-gray-900 
                                  border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent
-                                 text-sm transition-colors appearance-none"
+                                 text-sm sm:text-base transition-colors appearance-none"
                       >
                         <option value="">{t.hero.selectReturn}</option>
                         {airports.map((airport) => (
