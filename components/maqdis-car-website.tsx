@@ -108,7 +108,7 @@ const cars: Car[] = [
     version: 'Base',
     type: 'Économique',
     price: 350,
-    image: '/1 (4).jpeg',
+    image: '/clionardo.jpg',
     featured: true,
     transmission: 'Automatique',
     seats: 5,
@@ -612,7 +612,6 @@ const LocationSection = ({ language }: { language: Language }) => {
                 <Clock className="w-8 h-8 text-primary mb-2" />
                 <h3 className="font-semibold mb-1">{t.location.openHours}</h3>
                 <p className="text-sm text-gray-600">{t.location.weekdays}</p>
-                <p className="text-sm text-gray-600">{t.location.weekends}</p>
               </div>
               <div className="p-4 bg-gray-50 rounded-xl">
                 <MapPin className="w-8 h-8 text-primary mb-2" />
@@ -922,7 +921,7 @@ const HeroSection = ({ onPageChange, currentPage, language, onBookingRequest }: 
     <section className="relative min-h-screen pt-24 md:pt-28 pb-12">
       <div className="absolute inset-0">
         <Image
-          src="/lhero.jpeg"
+          src="/babhero.jpg"
           alt="Flotte de voitures de location Y-S car à Fès - Large choix de véhicules"
           fill
           priority
