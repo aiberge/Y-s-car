@@ -3,7 +3,7 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "CarRental",
     "name": "Y-S car",
-    "image": "https://www.krilicar.com/yslogo.png",
+    "image": "https://www.krilicar.com/ys.png",
     "description": "Location de voitures à Fès et partout au Maroc. Prix compétitifs, large gamme de véhicules, service professionnel.",
     "@id": "https://www.krilicar.com",
     "url": "https://www.krilicar.com",

@@ -691,22 +691,8 @@ const Navigation = ({ onPageChange, currentPage }: {
   return (
     <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-white/80 border-b border-white/30 shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-36 h-16">
-              <Image
-                src="/yslogo.png"
-                alt="Y-S car Logo"
-                fill
-                className="object-contain"
-                priority
-                quality={100}
-              />
-            </div>
-          </div>
-
-          {/* Center nav links */}
+        <div className="flex items-center justify-between h-32">
+          {/* Left nav links */}
           <div className="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-700">
             <button
               onClick={() => onPageChange('home')}
@@ -722,6 +708,20 @@ const Navigation = ({ onPageChange, currentPage }: {
               About
               {currentPage === 'about' && <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-primary rounded-full" />}
             </button>
+          </div>
+
+          {/* Center logo */}
+          <div className="flex items-center justify-center flex-1">
+            <div className="relative h-32 w-64 sm:w-80 lg:w-[32rem] flex-shrink-0">
+              <Image
+                src="/ys.png"
+                alt="Y-S car Logo"
+                fill
+                className="object-contain drop-shadow-lg"
+                priority
+                quality={100}
+              />
+            </div>
           </div>
 
           {/* Right utilities */}
@@ -1181,7 +1181,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="relative w-12 h-12">
                 <Image
-                  src="/yslogo.png"
+                  src="/ys.png"
                   alt="Y-S car Logo"
                   fill
                   className="object-contain"

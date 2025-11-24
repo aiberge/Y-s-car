@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${SITE_URL}/yslogo.png`,
+        url: `${SITE_URL}/ys.png`,
         width: 800,
         height: 600,
         alt: 'Y-S car Logo',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Y-S car | Location de voitures premium à Fès et partout au Maroc',
     description: 'Réservez une voiture récente avec Y-S car : tarifs transparents, livraison aéroport et support WhatsApp.',
-    images: [`${SITE_URL}/yslogo.png`],
+    images: [`${SITE_URL}/ys.png`],
   },
   robots: {
     index: true,
