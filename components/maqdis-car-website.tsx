@@ -22,7 +22,9 @@ import {
   Gauge,
   Briefcase,
   CheckCircle2,
-  Palette
+  Palette,
+  Instagram,
+  Facebook
 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -108,7 +110,7 @@ const cars: Car[] = [
     version: 'Base',
     type: 'Économique',
     price: 350,
-    image: '/clionardo.jpg',
+    image: '/1 (4).jpeg',
     featured: true,
     transmission: 'Automatique',
     seats: 5,
@@ -1171,7 +1173,7 @@ const Footer = () => {
       className="bg-gray-900 text-white py-12"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1223,6 +1225,33 @@ const Footer = () => {
             <div className="flex items-start space-x-2 text-gray-400">
               <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
               <span>Route Aïn Smen 6, 30040 Fès, Maroc</span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold">Suivez-nous</h3>
+            <div className="flex space-x-4">
+              <a
+                href="https://www.instagram.com/y_scarlocationdevoiture?igsh=MWx2eXNlbWU4a3h2Nw%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full text-gray-400 hover:text-white hover:bg-pink-600 transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/share/17daperfjC/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full text-gray-400 hover:text-white hover:bg-blue-600 transition-colors"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
             </div>
           </motion.div>
         </div>
